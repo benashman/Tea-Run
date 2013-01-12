@@ -1,0 +1,27 @@
+h1 {
+  font-size: 36px; }
+
+h2 {
+  font-size: 24px; }
+
+/******************************\
+ $ PRIMARY STYLES
+ $ AUTHOR: @username
+\******************************/
+#tea-run {
+  position: relative;
+  width: 200px;
+  height: 100px; }
+
+#brew-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -20px 0 0 -50px;
+  width: 100px;
+  height: 40px;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #148cff;
+  border: none;
+  outline: none; }

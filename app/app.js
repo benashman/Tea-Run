@@ -5,7 +5,7 @@ var connections = require('connections');
 
 connections = new connections();
 
-connections.hello();
+connections.init();
 
 var members = [];
 
@@ -52,4 +52,5 @@ res.render('room', {
 */
 
 app.listen(port);
+
 console.log('Listening on port 3000');
