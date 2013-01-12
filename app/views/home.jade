@@ -1,6 +1,14 @@
 doctype 5
 html(lang="en")
-  head
-    title= "Home | Tea run"
-  body
-    h1 Jade - node template engine
+	head
+		title= "Home | Tea run"
+	body
+		h1 Users
+
+		each user in users
+			.user
+				.details
+					.avatar= user.avatar
+					.name= user.name
+				.preferences
+					li.sugar-count= user.sugars
