@@ -1,6 +1,11 @@
 var express = require('express');
 var app = express();
 var port = 3000;
+var connections = require('connections');
+
+connections = new connections();
+
+connections.hello();
 
 // App config
 
