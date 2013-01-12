@@ -30,7 +30,7 @@ var background = {
 
         this.socket.on("brew", function (data) {
 
-            webkitNotifications.createNotification(null, "Brew Time!", data.message).show();
+            webkitNotifications.createHTMLNotification("notification.html").show();
 
         });
 
