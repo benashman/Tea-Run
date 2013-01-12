@@ -11,5 +11,10 @@ html(lang="en")
    div.tea-button
   p.tea-slogan  Bitches Love Tea
   div.div-tea-mates
-
-
+	each user in users
+		.user
+			.details
+				.avatar= user.avatar
+				.name= user.name
+			.preferences
+				li.sugar-count= user.sugars

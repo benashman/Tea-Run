@@ -9,6 +9,13 @@ connections.hello();
 
 // App config
 
+connections = new connections();
+
+connections.init();
+
+var members = [];
+
+// App config
 app.configure(function() {
 
 	// Path to app views
@@ -23,20 +30,33 @@ app.configure(function() {
 
 // Home
 app.get('/', function(req, res) {
+
+	// Load static index
 	res.sendfile('index.html');
+
 });
 
-// Room select
+// Tea Room
 app.get('/home', function(req, res) {
-	res.render('home');
+
+	console.log(connections.users);
+
+	// Render home template
+	res.render('home', {
+
+		users: connections.users
+
+	});
+
 });
 
-// Single room
-app.get('/room/:id', function(req, res) {
-	res.render('room', {
-		room: req.params
-	});
+/*
+res.render('room', {
+	pageTitle: "Room Meow",
+	room: req.params
 });
+*/
 
 app.listen(port);
+
 console.log('Listening on port 3000');
