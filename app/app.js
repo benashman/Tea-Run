@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var port = 3000;
 
-// CONFIG
+// App config
 
 app.configure(function() {
 
@@ -15,8 +15,6 @@ app.configure(function() {
 	app.use(express.static(__dirname + '/public'));
 
 });
-
-// ROUTES
 
 // Home
 app.get('/', function(req, res) {
@@ -34,8 +32,6 @@ app.get('/room/:id', function(req, res) {
 		room: req.params
 	});
 });
-
-// START
 
 app.listen(port);
 console.log('Listening on port 3000');
