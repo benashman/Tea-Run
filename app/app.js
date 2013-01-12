@@ -5,7 +5,7 @@ var connections = require('connections');
 
 connections = new connections();
 
-connections.hello();
+connections.init();
 
 app.configure(function() {
 
