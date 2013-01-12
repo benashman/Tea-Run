@@ -5,12 +5,6 @@ var connections = require('connections');
 
 connections = new connections();
 
-connections.hello();
-
-// App config
-
-connections = new connections();
-
 connections.init();
 
 var members = [];
