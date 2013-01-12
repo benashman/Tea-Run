@@ -7,16 +7,36 @@ connections = new connections();
 
 connections.init();
 
+// App config
+
 app.configure(function() {
 
+	// Path to app views
+	app.set('views', __dirname + '/views');
+
+	app.set('view engine', 'jade');
+
+	// Path to public
 	app.use(express.static(__dirname + '/public'));
 
 });
 
+// Home
 app.get('/', function(req, res) {
-	res.sendfile("index.html");
+	res.sendfile('index.html');
 });
 
-// Start server
+// Room select
+app.get('/rooms', function(req, res) {
+	res.render('rooms');
+});
+
+// Single room
+app.get('/room/:id', function(req, res) {
+	res.render('room', {
+		room: req.params
+	});
+});
+
 app.listen(port);
 console.log('Listening on port 3000');
