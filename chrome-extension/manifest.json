@@ -4,9 +4,7 @@
     "manifest_version": 2,
     "description": "Fancy a brew? Perhaps others do, too...",
     "permissions": [
-		"notifications",
-        "tabs",
-        "http://*/*"
+		"notifications"
     ],
 	"icons": {
 		"16": "tea-run.png",
@@ -17,17 +15,12 @@
     "web_accessible_resources": [
         "tea-run.png"
     ],
+    "options_page": "options.html",
     "browser_action": {
         "default_icon": "tea-run.png",
         "default_title": "Tea Run",
         "default_popup": "index.html"
     },
-    "content_scripts": [
-        {
-            "matches": ["http://*/*"],
-            "js": ["js/popup.js"]
-        }
-    ],
     "background": {
         "scripts": ["js/libs/jquery-1.8.3.min.js", "js/libs/socket.io.js", "js/background.js"]
     }
