@@ -12,11 +12,11 @@
           box-shadow:  $off-y $off-x $blur $color; /* Opera 10.5, IE9 */
 }
 
-@mixin trasition($property, $duration:0.3s, $function: ease-out){
-	 -moz-transition: $property $durations $function;  /* FF3.7+ */
-	 -o-transition: $property $durations $function;  /* Opera 10.5 */
-  	-webkit-transition: $property $durations $function;  /* Saf3.2+, Chrome */
-	transition: $property $durations $function; 
+@mixin transition($property, $duration, $function : ease) {
+    -webkit-transition: $property $duration $function;
+    -moz-transition: $property $duration $function;
+    -o-transition: $property $duration $function;
+    transition: $property $duration $function;
 }
 @mixin textshadow(){
 

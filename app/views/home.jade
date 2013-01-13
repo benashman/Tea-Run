@@ -12,9 +12,10 @@ div.tea-button
 p.tea-slogan  Bitches Love Tea
 div.div-tea-mates
  each user in users
-  .user
+  div.user
    .details
-    .avatar= user.avatar
+    .avatar
+     img(class='avatar-image', src=user.avatar)
      .name= user.name
     .preferences
     li.sugar-count= user.sugars
