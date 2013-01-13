@@ -1,1 +1,43 @@
-// SCSS MIXINS HERE
+@mixin rounded($radius: 10px) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+
+@mixin hide-text{
+    overflow:hidden;
+    text-indent:-9000px;
+    display:block;
+}
+
+@mixin shadow( $off-y, $off-x, $blur, $color){
+      -moz-box-shadow: $off-y $off-x $blur $color; /* FF3.5+ */
+  -webkit-box-shadow:  $off-y $off-x $blur $color; /* Saf3.0+, Chrome */
+          box-shadow:  $off-y $off-x $blur $color; /* Opera 10.5, IE9 */
+}
+
+@mixin transition($property, $duration, $function : ease) {
+    -webkit-transition: $property $duration $function;
+    -moz-transition: $property $duration $function;
+    -o-transition: $property $duration $function;
+    transition: $property $duration $function;
+}
+@mixin textshadow(){
+
+}
+@mixin box-emboss($opacity, $opacity2){
+    box-shadow:white($opacity) 0 1px 0, inset black($opacity2) 0 1px 0;
+}
+
+@mixin clearfix {
+    zoom:1;
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}

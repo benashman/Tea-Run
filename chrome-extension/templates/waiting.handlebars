@@ -1,6 +1,11 @@
-<ul>
+<ul class="brew-mates">
 {{#each users}}
-    <li class="user">{{name}}</li>
+    <li class="brewer" id="{{username}}">
+        <img src="img/{{name}}.jpg">
+        <span class="name">{{name}}</span>
+        {{#if preferences.milk}}<span class="milk"></span>{{/if}}
+        <span class="sugars">{{preferences.sugars}}</span>
+    </li>
 {{/each}}
 </ul>
-<p>Waiting for others to respond (<span id="countdown">60</span> seconds)...</p
+<p class="expires-in">Offer expires in <span id="time">10</span> seconds...</p>

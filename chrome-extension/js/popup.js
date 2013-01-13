@@ -1,14 +1,40 @@
 var popup = {
 
+    background: chrome.extension.getBackgroundPage().background,
+
     templates: Handlebars.templates,
+
+    reset: false,
 
     init: function () {
 
-        this.socket = chrome.extension.getBackgroundPage().background.socket;
+        var self = this;
 
-        this.bindSocketEvents();
+        this.socket = this.background.socket;
 
-        this.requestContent("users");
+        this.user = this.background.user;
+
+        if (this.user === false || this.reset === true) {
+
+            console.log("Resetting local storage.");
+
+            localStorage.clear();
+
+            this.loadView("options", {});
+
+        } else {
+
+            this.loadView("index", this.background.getUsersArray());
+
+        }
+
+        this.background.setPopupOpen(this);
+
+        $(window).unload(function () {
+
+            self.background.setPopupClosed();
+
+        });
 
         console.log("Popup loaded: ", popup);
 
@@ -20,6 +46,48 @@ var popup = {
 
         switch (view) {
 
+            case "options":
+
+                $("#options").on("submit", function (e) {
+
+                    e.preventDefault();
+
+                    var $this = $(this),
+                        name = $this.find("#name").val(),
+                        milk = $this.find("#milk").prop("checked"),
+                        sugars = $this.find("#sugars").val(),
+                        user;
+
+                    user = {
+
+                        username: name.toLowerCase(),
+
+                        name: name,
+
+                        preferences: {
+
+                            milk: milk,
+
+                            sugars: sugars
+
+                        }
+
+                    };
+
+                    self.user = user;
+
+                    self.background.user = user;
+
+                    localStorage.setItem("user", JSON.stringify(user));
+
+                    self.socket.emit("registration", self.user);
+
+                    return false;
+
+                })
+
+            break;
+
             case "index":
 
                 $("#brew-button").on("click", function (e) {
@@ -28,11 +96,13 @@ var popup = {
 
                     self.socket.emit("brew", {
 
-                        message: "Saul is making a brew!"
+                        type: "request",
+
+                        user: self.user
 
                     });
 
-                    self.loadView("waiting", {users: self.users});
+                    self.loadView("waiting", self.background.getUsersArray());
 
                     return false;
 
@@ -42,53 +112,33 @@ var popup = {
 
             case "waiting":
 
-                // blah
+                (function decrement () {
+
+                    timeout = setTimeout(function () {
+
+                        var seconds = parseInt($('#time').text(), 10);
+
+                        if (seconds > 1) {
+
+                            seconds--;
+
+                            $('#time').text(seconds);
+
+                            decrement();
+
+                        } else {
+
+                            self.goMakeTheTea();
+
+                        }
+
+                    }, 1000);
+
+                })();
 
             break;
 
         }
-
-    },
-
-    bindSocketEvents: function () {
-
-        var self = this;
-
-        self.socket.on("content", function (data) {
-
-            switch (data.type) {
-
-                case "users":
-
-                    console.log("Users: ", data.users);
-
-                    var users = [];
-
-                    for (var i in data.users) {
-
-                        users.push(data.users[i]);
-
-                    }
-
-                    self.users = users;
-
-                    self.loadView("index", {users: self.users});
-
-                break;
-
-            }
-
-        });
-
-    },
-
-    requestContent: function (type) {
-
-        this.socket.emit("content", {
-
-            type: type
-
-        });
 
     },
 
@@ -96,25 +146,51 @@ var popup = {
 
         var html = this.templates[template](context);
 
-        console.log(html);
-
-        switch (template) {
-
-            case "index":
-
-                $("#content").html(html);
-
-            break;
-
-            case "waiting":
-
-                $("#content").html(html);
-
-            break;
-
-        }
+        $("#content").html(html);
 
         this.bindViewEvents(template);
+
+        console.log("Loading view: ", template, context);
+
+    },
+
+    addUser: function (data) {
+
+        var html = this.templates.user(data);
+
+        $('#brew-mates').append(html);
+
+    },
+
+    removeUser: function (data) {
+
+        $("#" + data.username).remove();
+
+    },
+
+    brewResponse: function (data) {
+
+        var responseClass = (data.value) ? 'yes' : 'no';
+
+        $('#' + data.user.username).addClass(responseClass);
+
+    },
+
+    goMakeTheTea: function () {
+
+        $(".brewer").each(function () {
+
+            var $this = $(this);
+
+            if (($this.hasClass("no") || $this.hasClass("yes")) === false) {
+
+                $this.addClass("no");
+
+            }
+
+        });
+
+        $(".expires-in").text("Now go make the tea!");
 
     }
 
@@ -125,5 +201,17 @@ $(document).ready(function () {
     console.log("Hello World!");
 
     popup.init();
+
+    Handlebars.registerHelper("toLowerCase", function (value) {
+
+        return value.toLowerCase();
+
+    });
+
+    Handlebars.registerHelper("toLowerCase", function (value) {
+
+        return value.toLowerCase();
+
+    });
 
 });

@@ -7,27 +7,223 @@
  $ AUTHOR: @username
 \******************************/
 
-#tea-run {
+body {
 
-    position: relative;
-    width: 200px;
-    height: 100px;
+    margin: 0;
+    padding: 0;
+    background: $bgcolour;
+    border-top: 5px solid $grey;
 
+}
+
+#notification {
+
+    border: none;
+
+}
+
+.title {
+
+    margin: 20px 0;
+    color: $blue;
+    text-align: center;
+    font-size: 36px;
+    text-transform: uppercase;
+
+}
+
+.tea-slogan{
+    width: 150px;
+    text-align: center;
+    margin:  auto;
+    padding: 0 0 15px 0;
+    color: $grey;
+}
+.brew-mates {
+    width: 340px;
+}
+.brewer {
+    width: 300px;
+    height: 70px;
+    margin: 0 auto 20px;
+
+    background-color: $lightblue;
+    @include rounded(45px);
+
+    img {
+    float: left;
+    height: 60px;
+    width: 60px;
+    margin: 5px 0 10px 5px;
+    @include rounded(35px);
+
+    @include transition(all,600ms)
+    }
+
+    .name {
+
+        width: 100px;
+        height:40px;
+        float: left;
+        padding: 15px 0px 15px 15px;
+        color: $grey;
+        font-size: 1.6em;
+
+    }
+
+    .sugars {
+        display: block;
+        float: left;
+        height: 50px;
+        padding: 25px 0px 15px 30px;
+        background-image: url(../img/sugar.svg);
+        background-repeat: no-repeat;
+        background-size: 40px;
+        background-position: 0px 15px;
+        font-size: 1.4em;
+        color: $grey;
+    }
+
+    .milk {
+        display: block;
+        float: left;
+        height: 50px;
+        width: 20px;padding: 10px 0px 10px 30px;
+        background-image: url(../img/milk.svg);
+        background-repeat: no-repeat;
+        background-size: 14px;
+        background-position: 30px 20px;
+    }
+}
+
+
+
+.avatar-image{
+    height: 75px;
+    width: 75px;
 }
 
 #brew-button {
 
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -20px 0 0 -50px;
-    width: 100px;
-    height: 40px;
-    color: #fff;
+    display: block;
+    margin: 0 auto 20px;
+    height: 65px;
+    width: 300px;
+    color: $lightgrey;
+    text-decoration: none;
     text-transform: uppercase;
-    background-color: rgb(20, 140, 255);
+    font-size: 1.2em;
+    background: $blue url("../img/tea.svg") no-repeat 12px 6px;
+    @include rounded(8px);
     border: none;
     outline: none;
+
+}
+
+.rounded{
+    @include rounded();
+}
+.yes{
+    background: transparentize($green, .7) url(../img/yes.svg) no-repeat 5px 12px;
+    background-size: 60px;
+
+    img{
+        opacity: 0.1;
+    }
+}
+.no{
+    background: transparentize($red, .7) url(../img/no.svg) no-repeat 8px 8px;
+    background-size: 55px;
+
+    img {
+        opacity: 0.1;
+    }
+}
+.expires-in{
+    color: $lightgrey;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.6em;
+}
+
+#notification {
+
+    .prompt {
+
+        font-size: 16px;
+
+    }
+
+}
+
+#options {
+
+    margin: 0;
+
+    p {
+
+        margin: 0 0 5px;
+
+    }
+
+    #submit {
+
+        margin: 10px 0 0;
+        padding: 5px;
+        width: 100%;
+        border: none;
+
+    }
+
+}
+
+#notification {
+
+    margin: 0;
+    padding: 10px;
+    width: 280px;
+    @include clearfix;
+
+    .prompt {
+
+        margin: 0 20px 20px;
+        font-size: 22px;
+        font-weight: normal;
+        text-align: center;
+
+    }
+
+    .response {
+
+        float: left;
+        width: 135px;
+        height: 50px;
+        border: none;
+        outline: none;
+        @include hide-text;
+
+        &:active {
+
+            background-color: gray;
+
+        }
+
+    }
+
+    #yes {
+
+        background: #a6d49b url(../img/yes.svg) no-repeat center center;
+        background-size: 30px;
+
+    }
+
+    #no {
+
+        margin: 0 10px 0 0;
+        background: #db4e4d url(../img/no.svg) no-repeat center center;
+        background-size: 30px;
+
+    }
 
 }
 

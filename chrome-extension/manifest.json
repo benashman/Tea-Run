@@ -4,7 +4,8 @@
     "manifest_version": 2,
     "description": "Fancy a brew? Perhaps others do, too...",
     "permissions": [
-		"notifications"
+		"notifications",
+        "tabs"
     ],
 	"icons": {
 		"16": "tea-run.png",
@@ -13,9 +14,9 @@
 		"128": "tea-run.png"
 	},
     "web_accessible_resources": [
-        "tea-run.png"
+        "tea-run.png",
+        "js/notification.js"
     ],
-    "options_page": "options.html",
     "browser_action": {
         "default_icon": "tea-run.png",
         "default_title": "Tea Run",

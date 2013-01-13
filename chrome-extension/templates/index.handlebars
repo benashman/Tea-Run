@@ -1,6 +1,11 @@
-<ul>
+<ul class="brew-mates">
 {{#each users}}
-    <li class="user">{{name}}</li>
+    <li class="brewer" id="{{username}}">
+        <img src="img/{{name}}.jpg">
+        <span class="name">{{name}}</span>
+        {{#if preferences.milk}}<span class="milk"></span>{{/if}}
+        <span class="sugars">{{preferences.sugars}}</span>
+    </li>
 {{/each}}
 </ul>
-<button id="brew-button">Make a brew!</button>
+<button id="brew-button">Makin' a brew?</button>
